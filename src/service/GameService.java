@@ -24,8 +24,8 @@ public class GameService {
     public Game create(Game game) {
 
         validateGame(game);
-
         game.setId(null); // Sécurité : éviter injection d'id
+
         return repository.save(game);
     }
 
@@ -57,6 +57,5 @@ public class GameService {
         if (game.getStudio() == null || game.getStudio().isBlank()) {
             throw new IllegalArgumentException("Studio is required");
         }
-
     }
 }

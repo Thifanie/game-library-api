@@ -8,7 +8,7 @@ public class Game {
     private int releaseYear;
     private boolean multi;
 
-    Game(Long id, String title, String studio, String genre, int releaseYear, boolean multi) {
+    public Game(Long id, String title, String studio, String genre, int releaseYear, boolean multi) {
         this.id = id;
         this.title = title;
         this.studio = studio;
@@ -52,6 +52,18 @@ public class Game {
     }
     public void setMulti(boolean multi) {
         this.multi = multi;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", studio='" + studio + '\'' +
+                ", genre='" + genre + '\'' +
+                ", releaseYear=" + releaseYear +
+                ", multiplayer=" + multi +
+                '}';
     }
 }
 
