@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         GameRepository repository = new GameRepository();
-        GameService service = new GameService();
+        GameService service = new GameService(repository);
         GameHandler handler = new GameHandler();
 
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
