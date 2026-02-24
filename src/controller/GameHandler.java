@@ -55,6 +55,35 @@ public class GameHandler implements HttpHandler {
         }
     }
 
+    private void handlePost(HttpExchange exchange) throws IOException {
+        Game game = mapper.readValue(exchange.getRequestBody(), Game.class);
+        Game created = service.create(game);
+        sendResponse(exchange, 201, mapper.writeValueAsString(created));
+    }
+
+    private void handlePut(HttpExchange exchange, String path) throws IOException {
+        if (!path.matches("/games/\\d+")) {
+            sendResponse(exchange, 404, "Not Found");
+            return;
+        }
+
+        Long id = extractId(path);
+        Game game = mapper.readValue(exchange.getRequestBody(), Game.class);
+        Game updated = service.update(id, game);
+        sendResponse(exchange, 200, mapper.writeValueAsString(updated));
+    }
+
+    private void handleDelete(HttpExchange exchange, String path) throws IOException {
+        if (!path.matches("/games/\\d+")) {
+            sendResponse(exchange, 404, "Not Found");
+            return;
+        }
+
+        Long id = extractId(path);
+        service.delete(id);
+        sendResponse(exchange, 204, ""); // 204 No Content
+    }
+
     private Long extractId(String path) {
         return Long.parseLong(path.substring(path.lastIndexOf("/") + 1));
 //        lastIndexOf va chercher la position du dernier slash dans le String path.
