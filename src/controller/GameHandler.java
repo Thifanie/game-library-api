@@ -26,9 +26,9 @@ public class GameHandler implements HttpHandler {
         try {
             switch (method) {
                 case "GET" -> handleGet(exchange, path);
-//                case "POST" -> handlePost(exchange);
-//                case "PUT" -> handlePut(exchange, path);
-//                case "DELETE" -> handleDelete(exchange, path);
+                case "POST" -> handlePost(exchange);
+                case "PUT" -> handlePut(exchange, path);
+                case "DELETE" -> handleDelete(exchange, path);
                 default -> sendResponse(exchange, 405, "Method Not Allowed");
             }
         } catch (IllegalArgumentException e) {

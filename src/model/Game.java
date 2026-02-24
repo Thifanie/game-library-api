@@ -8,6 +8,8 @@ public class Game {
     private int releaseYear;
     private boolean multi;
 
+    public Game() {};
+
     public Game(Long id, String title, String studio, String genre, int releaseYear, boolean multi) {
         this.id = id;
         this.title = title;

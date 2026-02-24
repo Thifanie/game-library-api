@@ -12,9 +12,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         GameRepository repository = new GameRepository();
         GameService service = new GameService(repository);
-//        GameHandler handler = new GameHandler();
-//
-//        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+        GameHandler handler = new GameHandler(service);
+
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+        server.createContext("/games", handler);
+        server.setExecutor(null);
+        server.start();
+
+        System.out.println("Server started on port 8080");
 
         service.create(new Game(null,
                 "Overwatch",
@@ -38,11 +43,6 @@ public class Main {
                 true));
 
         service.delete(2L);
-
-        System.out.println(service.getAll());
-
-        System.out.println(service.getById(2L));
-
     }
 
 }
